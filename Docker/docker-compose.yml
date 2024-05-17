@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: localdb
+    restart: always
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - my-db6:/var/lib/postgresql/data
+volumes:
+  my-db6:
