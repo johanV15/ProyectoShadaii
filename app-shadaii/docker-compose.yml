@@ -16,5 +16,14 @@ services:
       POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - my-db6:/var/lib/postgresql/data
+      - ./script_shadaii.sql:/docker-entrypoint-initdb.d/script_shadaii.sql
+  app:
+    build: .
+    container_name: my-nestjs-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    command: npm run start:dev 
 volumes:
   my-db6:

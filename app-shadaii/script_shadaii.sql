@@ -1,4 +1,3 @@
-CREATE DATABASE shadaii;
 
 CREATE TABLE ventas (
     id serial NOT NULL,
@@ -84,60 +83,60 @@ CREATE TABLE Tipo_Gasto (
 --tabla Pedidos
 ALTER TABLE Pedidos	
 ADD CONSTRAINT fk_pedidos_gasto
-FOREIGN KEY (id_gasto) REFERENCES Gastos(id)
+FOREIGN KEY (id_gasto) REFERENCES Gastos(id);
 --ON DELETE CASCADE;
 
 --tabla Detalle_Pedidos
 ALTER TABLE Detalle_Pedidos
 ADD CONSTRAINT fk_detallePedidos_pedido
-FOREIGN KEY (id_pedido) REFERENCES Pedidos(id)
+FOREIGN KEY (id_pedido) REFERENCES Pedidos(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Detalle_Pedidos
 ADD CONSTRAINT fk_detallePedidos_producto
-FOREIGN KEY (id_producto) REFERENCES Productos(id)
+FOREIGN KEY (id_producto) REFERENCES Productos(id);
 --ON DELETE CASCADE;
 
 -- tabla Stock_Productos
 ALTER TABLE Stock_Productos
 ADD CONSTRAINT fk_stockProductos_pedido
-FOREIGN KEY (referencia_pedido) REFERENCES Pedidos(id)
+FOREIGN KEY (referencia_pedido) REFERENCES Pedidos(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Stock_Productos
 ADD CONSTRAINT fk_stockProductos_producto
-FOREIGN KEY (id_producto) REFERENCES Productos(id)
+FOREIGN KEY (id_producto) REFERENCES Productos(id);
 --ON DELETE CASCADE;
 
 -- tabla Detalle_Ventas
 ALTER TABLE Detalle_Ventas
 ADD CONSTRAINT fk_detalleVentas_venta
-FOREIGN KEY (id_venta) REFERENCES Ventas(id)
+FOREIGN KEY (id_venta) REFERENCES Ventas(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Detalle_Ventas
 ADD CONSTRAINT fk_detalleVentas_producto
-FOREIGN KEY (id_producto) REFERENCES Productos(id)
+FOREIGN KEY (id_producto) REFERENCES Productos(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Detalle_Ventas
 ADD CONSTRAINT fk_detalleVentas_cliente
-FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
+FOREIGN KEY (id_cliente) REFERENCES Clientes(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Pagos
 ADD CONSTRAINT fk_Pagos_venta
-FOREIGN KEY (id_venta) REFERENCES Ventas(id)
+FOREIGN KEY (id_venta) REFERENCES Ventas(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Pagos
 ADD CONSTRAINT fk_Pagos_cliente
-FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
+FOREIGN KEY (id_cliente) REFERENCES Clientes(id);
 --ON DELETE CASCADE;
 
 ALTER TABLE Gastos
 ADD CONSTRAINT fk_tipo_gasto
-FOREIGN KEY (id_tipo) REFERENCES Tipo_Gasto(id)
+FOREIGN KEY (id_tipo) REFERENCES Tipo_Gasto(id);
 --ON DELETE CASCADE;
 
 -- INSERTS

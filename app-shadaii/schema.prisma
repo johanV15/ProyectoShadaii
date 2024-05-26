@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ventas {
+  id         Int     @id @default(autoincrement())
+  fecha_venta DateTime
+  Detalle_Ventas Detalle_Ventas[]
+  Pagos Pagos[]
+  @@map("ventas")
+}
+
+model Gastos {
+  id          Int    @id @default(autoincrement())
+  id_tipo     Int
+  descripcion String
+  fecha_gasto DateTime
+  valor       Float     // `money` type is represented as `Float` in Prisma
+  Tipo_Gasto  Tipo_Gasto @relation(fields: [id_tipo], references: [id])
+  Pedidos     Pedidos[]
+  @@map("Gastos")
+}
+
+model Productos {
+  id           Int    @id @default(autoincrement())
+  nombre       String    @db.VarChar(36)
+  precio_venta Float     // `money` type is represented as `Float` in Prisma
+  Detalle_Pedidos Detalle_Pedidos[]
+  Stock_Productos Stock_Productos[]
+  Detalle_Ventas Detalle_Ventas[]
+  @@map("Productos")
+}
+
+model clientes {
+  id       Int    @id
+  nombre   String    @db.VarChar(20)
+  apellido String  @db.VarChar(20)
+  Detalle_Ventas Detalle_Ventas[]
+  Pagos Pagos[]
+  @@map("clientes")
+}
+
+model Pedidos {
+  id       String    @id @db.VarChar(10)
+  id_gasto Int
+  Gasto    Gastos    @relation(fields: [id_gasto], references: [id])
+  Detalle_Pedidos Detalle_Pedidos[]
+  Stock_Productos Stock_Productos[]
+  @@map("Pedidos")
+}
+
+model Detalle_Pedidos {
+  id                Int    @id @default(autoincrement())
+  id_pedido         String    @db.VarChar(10)
+  id_producto       Int
+  cantidad_producto Int
+  Pedido            Pedidos   @relation(fields: [id_pedido], references: [id])
+  Producto          Productos @relation(fields: [id_producto], references: [id])
+  @@map("Detalle_Pedidos")
+}
+
+model Stock_Productos {
+  id                Int    @id @default(autoincrement())
+  referencia_pedido String    @db.VarChar(10)
+  id_producto       Int
+  stock             Int
+  fecha_vencimiento DateTime
+  Pedido            Pedidos   @relation(fields: [referencia_pedido], references: [id])
+  Producto          Productos @relation(fields: [id_producto], references: [id])
+  @@map("Stock_Productos")
+}
+
+model Detalle_Ventas {
+  id          Int    @id @default(autoincrement())
+  id_venta    Int
+  id_producto Int
+  id_cliente  Int
+  cantidad    Int
+  subtotal    Float     // `money` type is represented as `Float` in Prisma
+  Venta       Ventas    @relation(fields: [id_venta], references: [id])
+  Producto    Productos @relation(fields: [id_producto], references: [id])
+  Cliente     clientes  @relation(fields: [id_cliente], references: [id])
+  @@map("Detalle_Ventas")
+}
+
+model Pagos {
+  id         Int    @id @default(autoincrement())
+  id_venta   Int
+  id_cliente Int
+  fecha_pago DateTime
+  total_pago Float     // `money` type is represented as `Float` in Prisma
+  pagado     Boolean
+  Venta      Ventas    @relation(fields: [id_venta], references: [id])
+  Cliente    clientes  @relation(fields: [id_cliente], references: [id])
+  @@map("Pagos")
+}
+
+model Tipo_Gasto {
+  id    Int    @id @default(autoincrement())
+  nombre String   @db.VarChar(30)
+  Gastos Gastos[]
+  @@map("Tipo_Gasto")
+}
