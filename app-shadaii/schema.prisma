@@ -14,102 +14,102 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Ventas {
+model ventas {
   id         Int     @id @default(autoincrement())
   fecha_venta DateTime
-  Detalle_Ventas Detalle_Ventas[]
-  Pagos Pagos[]
+  detalle_Ventas detalle_ventas[]
+  pagos pagos[]
   @@map("ventas")
 }
 
-model Gastos {
+model gastos {
   id          Int    @id @default(autoincrement())
   id_tipo     Int
   descripcion String
   fecha_gasto DateTime
   valor       Float     // `money` type is represented as `Float` in Prisma
-  Tipo_Gasto  Tipo_Gasto @relation(fields: [id_tipo], references: [id])
-  Pedidos     Pedidos[]
-  @@map("Gastos")
+  tipo_gasto  tipo_gasto @relation(fields: [id_tipo], references: [id])
+  pedidos     pedidos[]
+  @@map("gastos")
 }
 
-model Productos {
+model productos {
   id           Int    @id @default(autoincrement())
   nombre       String    @db.VarChar(36)
   precio_venta Float     // `money` type is represented as `Float` in Prisma
-  Detalle_Pedidos Detalle_Pedidos[]
-  Stock_Productos Stock_Productos[]
-  Detalle_Ventas Detalle_Ventas[]
-  @@map("Productos")
+  detalle_pedidos detalle_pedidos[]
+  stock_productos stock_productos[]
+  detalle_ventas detalle_ventas[]
+  @@map("productos")
 }
 
 model clientes {
   id       Int    @id
   nombre   String    @db.VarChar(20)
   apellido String  @db.VarChar(20)
-  Detalle_Ventas Detalle_Ventas[]
-  Pagos Pagos[]
+  detalle_ventas detalle_ventas[]
+  pagos pagos[]
   @@map("clientes")
 }
 
-model Pedidos {
+model pedidos {
   id       String    @id @db.VarChar(10)
   id_gasto Int
-  Gasto    Gastos    @relation(fields: [id_gasto], references: [id])
-  Detalle_Pedidos Detalle_Pedidos[]
-  Stock_Productos Stock_Productos[]
-  @@map("Pedidos")
+  gasto    gastos    @relation(fields: [id_gasto], references: [id])
+  detalle_pedidos detalle_pedidos[]
+  stock_productos stock_productos[]
+  @@map("pedidos")
 }
 
-model Detalle_Pedidos {
+model detalle_pedidos {
   id                Int    @id @default(autoincrement())
   id_pedido         String    @db.VarChar(10)
   id_producto       Int
   cantidad_producto Int
-  Pedido            Pedidos   @relation(fields: [id_pedido], references: [id])
-  Producto          Productos @relation(fields: [id_producto], references: [id])
-  @@map("Detalle_Pedidos")
+  pedido            pedidos   @relation(fields: [id_pedido], references: [id])
+  producto          productos @relation(fields: [id_producto], references: [id])
+  @@map("detalle_pedidos")
 }
 
-model Stock_Productos {
+model stock_productos {
   id                Int    @id @default(autoincrement())
   referencia_pedido String    @db.VarChar(10)
   id_producto       Int
   stock             Int
   fecha_vencimiento DateTime
-  Pedido            Pedidos   @relation(fields: [referencia_pedido], references: [id])
-  Producto          Productos @relation(fields: [id_producto], references: [id])
-  @@map("Stock_Productos")
+  pedido            pedidos   @relation(fields: [referencia_pedido], references: [id])
+  producto          productos @relation(fields: [id_producto], references: [id])
+  @@map("stock_productos")
 }
 
-model Detalle_Ventas {
+model detalle_ventas {
   id          Int    @id @default(autoincrement())
   id_venta    Int
   id_producto Int
   id_cliente  Int
   cantidad    Int
   subtotal    Float     // `money` type is represented as `Float` in Prisma
-  Venta       Ventas    @relation(fields: [id_venta], references: [id])
-  Producto    Productos @relation(fields: [id_producto], references: [id])
-  Cliente     clientes  @relation(fields: [id_cliente], references: [id])
-  @@map("Detalle_Ventas")
+  venta       ventas    @relation(fields: [id_venta], references: [id])
+  producto    productos @relation(fields: [id_producto], references: [id])
+  cliente     clientes  @relation(fields: [id_cliente], references: [id])
+  @@map("detalle_ventas")
 }
 
-model Pagos {
+model pagos {
   id         Int    @id @default(autoincrement())
   id_venta   Int
   id_cliente Int
   fecha_pago DateTime
   total_pago Float     // `money` type is represented as `Float` in Prisma
   pagado     Boolean
-  Venta      Ventas    @relation(fields: [id_venta], references: [id])
-  Cliente    clientes  @relation(fields: [id_cliente], references: [id])
-  @@map("Pagos")
+  venta      ventas    @relation(fields: [id_venta], references: [id])
+  cliente    clientes  @relation(fields: [id_cliente], references: [id])
+  @@map("pagos")
 }
 
-model Tipo_Gasto {
+model tipo_gasto {
   id    Int    @id @default(autoincrement())
   nombre String   @db.VarChar(30)
-  Gastos Gastos[]
-  @@map("Tipo_Gasto")
+  gastos gastos[]
+  @@map("tipo_gasto")
 }
