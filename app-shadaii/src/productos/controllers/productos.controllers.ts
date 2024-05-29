@@ -1,3 +1,4 @@
+// productos.controller.ts
 import { Controller, Get, Post, Body, Param, Patch, Delete, Render, Res } from '@nestjs/common';
 import { ProductosService } from '../services/productos.service';
 import { CreateProductosDto } from '../dtos/create-productos.dto';

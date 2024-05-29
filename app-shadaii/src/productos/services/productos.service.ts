@@ -1,3 +1,4 @@
+// productos.service.ts
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateProductosDto } from '../dtos/create-productos.dto';
@@ -17,9 +18,8 @@ export class ProductosService {
     return this.prisma.productos.findMany({
       include: {
         stock_productos: true,
-      }
+      },
     });
-
   }
 
   async findOne(id: number) {

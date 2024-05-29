@@ -195,9 +195,34 @@
     <label for="cantidadInput" class="form-label">Cantidad</label>
     <input type="number" class="form-control" id="cantidadInput" required />
   </div>
+    <div class="mb-3">
+    <label for="pagoSelect" class="form-label">Pago</label>
+    <select class="form-select" id="pagoSelect" required>
+      <option selected disabled value="">Se realizo pago</option>
+        <option value="true">Si</option>
+                <option value="false">No</option>
+
+    </select>
+  </div>
   <button type="submit" class="btn btn-primary">Registrar Venta</button>
 </form>
-          </div>
+<h1 class="my-5">Registrar Nuevo Cliente</h1>
+            <form id="registroClienteForm">
+              <div class="mb-3">
+                <label for="nombreInput" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreInput" required />
+              </div>
+              <div class="mb-3">
+                <label for="apellidoInput" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellidoInput" required />
+              </div>
+              <div class="mb-3">
+                <label for="IDInput" class="form-label">ID</label>
+                <input type="number" class="form-control" id="IDInput" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+            </form>
+          </div>s
         </div>
       </section>
     </main>
@@ -223,31 +248,53 @@
     <script src='/static/vendor/tinymce/tinymce.min.js'></script>
     <script src='/static/vendor/php-email-form/validate.js'></script>
 
-    <script src='/static/js/main.js'></script>
-    <script>
-  document.getElementById('registroVentaForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+<script>
+      document.getElementById('registroVentaForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const id_producto = parseInt(document.getElementById('productoSelect').value);
+        const id_cliente = parseInt(document.getElementById('clienteSelect').value);
+        const cantidad = parseInt(document.getElementById('cantidadInput').value);
+        const fecha_venta = new Date().toISOString();
+        const pago = document.getElementById('pagoSelect').value === 'true';
 
-    const id_producto = parseInt(document.getElementById('productoSelect').value);
-    const id_cliente = parseInt(document.getElementById('clienteSelect').value);
-    const cantidad = parseInt(document.getElementById('cantidadInput').value);
-    const fecha_venta = new Date().toISOString();
+        const response = await fetch('/Ventas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_producto, id_cliente, cantidad, fecha_venta, pago }),
+        });
 
-    const response = await fetch('/Ventas', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id_producto, id_cliente, cantidad, fecha_venta }),
-    });
+        if (response.ok) {
+          alert('Venta registrada exitosamente');
+        } else {
+          alert('Error al registrar la venta');
+        }
+      });
 
-    if (response.ok) {
-      alert('Venta registrada exitosamente');
-    } else {
-      alert('Error al registrar la venta');
-    }
-  });
-</script>
+      document.getElementById('registroClienteForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const nombre = document.getElementById('nombreInput').value;
+        const apellido = document.getElementById('apellidoInput').value;
+        const id = parseInt(document.getElementById('IDInput').value);
+
+        const response = await fetch('/Clientes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, apellido, id }),
+        });
+
+        if (response.ok) {
+          const nuevoCliente = await response.json();
+          const clienteSelect = document.getElementById('clienteSelect');
+          const nuevaOpcion = new Option(`${nuevoCliente.nombre} ${nuevoCliente.apellido}`, nuevoCliente.id);
+          clienteSelect.add(nuevaOpcion);
+          clienteSelect.value = nuevoCliente.id;
+          alert('Cliente registrado exitosamente');
+        } else {
+          alert('Error al registrar el cliente');
+        }
+      });
+    </script>
+  
   </body>
 
 </html>
