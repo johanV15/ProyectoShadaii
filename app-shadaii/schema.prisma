@@ -76,9 +76,11 @@ model stock_productos {
   referencia_pedido String    @db.VarChar(10)
   id_producto       Int
   stock             Int
-  fecha_vencimiento DateTime
+  fecha_vencimiento DateTime? 
   pedido            pedidos   @relation(fields: [referencia_pedido], references: [id])
-  producto          productos @relation(fields: [id_producto], references: [id])
+  productos          productos @relation(fields: [id_producto], references: [id])
+  @@index([id_producto], name: "id_producto")
+
   @@map("stock_productos")
 }
 
@@ -88,7 +90,7 @@ model detalle_ventas {
   id_producto Int
   id_cliente  Int
   cantidad    Int
-  subtotal    Float     // `money` type is represented as `Float` in Prisma
+  subtotal    Float     
   venta       ventas    @relation(fields: [id_venta], references: [id])
   producto    productos @relation(fields: [id_producto], references: [id])
   cliente     clientes  @relation(fields: [id_cliente], references: [id])

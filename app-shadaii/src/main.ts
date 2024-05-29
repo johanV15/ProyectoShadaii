@@ -6,9 +6,11 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // Configurar el directorio de vistas y el motor de plantillas
-  app.useStaticAssets(join(__dirname, '..', 'src/public'));
+  app.useStaticAssets(join(__dirname, '..', 'src/public'),{
+  prefix: '/static',
+});
   app.setBaseViewsDir(join(__dirname, '..', 'src/views'));
+  
   app.setViewEngine('hbs');
 
   await app.listen(3000);

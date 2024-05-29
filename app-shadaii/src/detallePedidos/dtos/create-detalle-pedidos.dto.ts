@@ -1,10 +1,10 @@
-import {IsInt} from 'class-validator';
+import {IsInt, IsString} from 'class-validator';
 
 export class CreateDetallePedidosDto{
     @IsInt()
     id: number;
-    @IsInt()
-    id_pedido: number;
+    @IsString()
+    id_pedido: string;
     @IsInt()
     id_producto: number;
     @IsInt()

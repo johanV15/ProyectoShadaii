@@ -1,8 +1,8 @@
-import {IsInt} from 'class-validator';
+import {IsInt, IsString} from 'class-validator';
 
 export class CreatePedidosDto{
-    @IsInt()
-    id: number;
+    @IsString()
+    id: string;
     @IsInt()
     id_gasto: number;
 }

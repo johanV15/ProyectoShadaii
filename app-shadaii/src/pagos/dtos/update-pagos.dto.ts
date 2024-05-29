@@ -3,10 +3,6 @@ import {IsBoolean, IsDate, IsInt, IsNumber, IsOptional} from 'class-validator';
 export class UpdatePagosDto{
     @IsInt()
     @IsOptional()
-    id?: number;
-
-    @IsInt()
-    @IsOptional()
     id_venta?: number;
 
     @IsInt()

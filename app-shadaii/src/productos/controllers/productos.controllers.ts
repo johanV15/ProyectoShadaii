@@ -21,7 +21,7 @@ export class ProductosController {
 
   @Get('view')
   @Render('productos')
-  async getStock() {
+  async getProductos() {
     const productos = await this.productosService.findAll();
     return { productos };
   }

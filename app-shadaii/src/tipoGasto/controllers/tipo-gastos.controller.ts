@@ -13,8 +13,9 @@ export class TipoGastosController {
   }
 
   @Get()
-  findAll() {
-    return this.tipoGastosService.findAll();
+  async getTipoGastosData() {
+    const tipoGastos = await this.tipoGastosService.findAll();
+    return {tipoGastos}
   }
 
   @Get(':id')

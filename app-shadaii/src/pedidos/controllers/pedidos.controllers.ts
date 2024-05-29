@@ -7,28 +7,29 @@ import { UpdatePedidosDto } from '../dtos/update-pedidos.dto';
 export class PedidosController {
   constructor(private readonly pedidosService: PedidosService) {}
 
-  /*@Post()
+  @Post()
   create(@Body() createPedidosDto: CreatePedidosDto) {
     return this.pedidosService.create(createPedidosDto);
-  }*/
+  }
 
   @Get()
-  findAll() {
-    return this.pedidosService.findAll();
+  async getPedidosData() {
+    const pedidos = await this.pedidosService.findAll();
+    return {pedidos}
   }
-/*
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pedidosService.findOne(+id);
+    return this.pedidosService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePedidosDto: UpdatePedidosDto) {
-    return this.pedidosService.update(+id, updatePedidosDto);
+    return this.pedidosService.update(id, updatePedidosDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pedidosService.remove(+id);
-  }*/
+    return this.pedidosService.remove(id);
+  }
 }

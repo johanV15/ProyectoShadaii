@@ -2,8 +2,6 @@ import {IsBoolean, IsDate, IsInt, IsNumber} from 'class-validator';
 
 export class CreatePagosDto{
     @IsInt()
-    id: number;
-    @IsInt()
     id_venta: number;
     @IsInt()
     id_cliente: number;

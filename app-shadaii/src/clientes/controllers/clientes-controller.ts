@@ -16,6 +16,11 @@ export class ClientesController {
   findAll() {
     return this.clientesService.findAll();
   }
+  @Get()
+  async GetClientes() {
+    const clientes = await this.clientesService.findAll()
+    return{clientes}
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

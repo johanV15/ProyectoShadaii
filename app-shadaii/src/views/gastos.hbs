@@ -1,266 +1,222 @@
-<html lang='en'>
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <meta content='' name='description' />
-    <meta content='' name='keywords' />
+    <meta content name="description" />
+    <meta content name="keywords" />
 
-    <link href='/img/favicon.png' rel='icon' />
-    <link href='/img/apple-touch-icon.png' rel='apple-touch-icon' />
+    <link href="/static/img/favicon.png" rel="icon" />
+    <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
-    <link href='https://fonts.gstatic.com' rel='preconnect' />
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'
-      rel='stylesheet'
-    />
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet" />
 
-    <link href='/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' />
-    <link href='/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet' />
-    <link href='/vendor/boxicons/css/boxicons.min.css' rel='stylesheet' />
-    <link href='/vendor/quill/quill.snow.css' rel='stylesheet' />
-    <link href='/vendor/quill/quill.bubble.css' rel='stylesheet' />
-    <link href='/vendor/remixicon/remixicon.css' rel='stylesheet' />
-    <link href='/vendor/simple-datatables/style.css' rel='stylesheet' />
-  <title>Registrar Gasto</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href='css/style.css' rel='stylesheet' />
-    
-
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link href="/static/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet" />
+    <link href="/static/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet" />
+    <link href="/static/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/static/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/static/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/static/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="/static/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
-
-    <header id='header' class='header fixed-top d-flex align-items-center'>
-
-      <div class='d-flex align-items-center justify-content-between'>
-        <a href='index.hbs' class='logo d-flex align-items-center'>
-          <img src='../public/img/logo.png' alt='' />
-          <span class='d-none d-lg-block'>Shadaii</span>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="/" class="logo d-flex align-items-center">
+          <img src="../public/img/logo.png" alt />
+          <span class="d-none d-lg-block">Shadaii</span>
         </a>
-        <i class='bi bi-list toggle-sidebar-btn'></i>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
-      <nav class='header-nav ms-auto'>
-        <ul class='d-flex align-items-center'>
-
-          <li class='nav-item d-block d-lg-none'>
-            <a class='nav-link nav-icon search-bar-toggle' href='#'>
-              <i class='bi bi-search'></i>
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle" href="#">
+              <i class="bi bi-search"></i>
             </a>
           </li>
         </ul>
       </nav>
-
     </header>
 
-    <aside id='sidebar' class='sidebar'>
-
-      <ul class='sidebar-nav' id='sidebar-nav'>
-        <li class='nav-heading'>Acciones</li>
-        <li class='nav-item'>
-          <a class='nav-link' href='index.hbs'>
-            <i class='bi bi-grid'></i>
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-heading">Acciones</li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="bi bi-grid"></i>
             <span>Inicio</span>
           </a>
         </li>
 
-        <li class='nav-item'>
-          <a
-            class='nav-link collapsed'
-            data-bs-target='#components-nav'
-            data-bs-toggle='collapse'
-            href='#'
-          >
-            <i class='bi bi-cart'></i><span>Ventas</span><i
-              class='bi bi-chevron-down ms-auto'
-            ></i>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#components-nav"
+            data-bs-toggle="collapse" href="#">
+            <i class="bi bi-cart"></i><span>Ventas</span><i
+              class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul
-            id='components-nav'
-            class='nav-content collapse'
-            data-bs-parent='#sidebar-nav'
-          >
+          <ul id="components-nav" class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
             <li>
-              <a href='ventas/view'>
-                <i class='bi bi-circle'></i><span>Registrar una venta</span>
+              <a href="../ventas/view">
+                <i class="bi bi-circle"></i><span>Registrar una venta</span>
               </a>
             </li>
             <li>
-              <a href='components-accordion.html'>
-                <i class='bi bi-circle'></i><span>Editar Ventas</span>
-              </a>
-            </li>
-            <li>
-              <a href='components-accordion.html'>
-                <i class='bi bi-circle'></i><span>Editar Ventas</span>
+              <a href="#">
+                <i class="bi bi-circle"></i><span>Editar Ventas</span>
               </a>
             </li>
           </ul>
         </li>
 
-        <li class='nav-item'>
-          <a
-            class='nav-link collapsed'
-            data-bs-target='#forms-nav'
-            data-bs-toggle='collapse'
-            href='#'
-          >
-            <i class='bi bi-journal-text'></i><span>Gastos</span><i
-              class='bi bi-chevron-down ms-auto'
-            ></i>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#forms-nav"
+            data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Gastos</span><i
+              class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul
-            id='forms-nav'
-            class='nav-content collapse'
-            data-bs-parent='#sidebar-nav'
-          >
+          <ul id="forms-nav" class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
             <li>
-              <a href='forms-elements.html'>
-                <i class='bi bi-circle'></i><span>Registrar Gasto</span>
+              <a href="../gastos/view">
+                <i class="bi bi-circle"></i><span>Registrar Gasto</span>
               </a>
             </li>
             <li>
-              <a href='forms-layouts.html'>
-                <i class='bi bi-circle'></i><span>Editar Gastos</span>
+              <a href="../gastos/edit_view">
+                <i class="bi bi-circle"></i><span>Editar Gastos</span>
               </a>
             </li>
           </ul>
         </li>
 
-        <li class='nav-item'>
-          <a
-            class='nav-link collapsed'
-            data-bs-target='#tables-nav'
-            data-bs-toggle='collapse'
-            href='#'
-          >
-            <i class='bi bi-layout-text-window-reverse'></i><span
-            >Inventario</span><i class='bi bi-chevron-down ms-auto'></i>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#tables-nav"
+            data-bs-toggle="collapse" href="#">
+            <i
+              class="bi bi-layout-text-window-reverse"></i><span>Inventario</span><i
+              class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul
-            id='tables-nav'
-            class='nav-content collapse'
-            data-bs-parent='#sidebar-nav'
-          >
+          <ul id="tables-nav" class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
             <li>
-              <a href='tables-general.html'>
-                <i class='bi bi-circle'></i><span>Ajustes de Inventario</span>
-              </a>
-            </li>
-            <li>
-              <a href='tables-data.html'>
-                <i class='bi bi-circle'></i><span>Lista de precios</span>
-              </a>
-            </li>
-            <li>
-              <a href='tables-data.html'>
-                <i class='bi bi-circle'></i><span>Categorias</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class='nav-item'>
-          <a
-            class='nav-link collapsed'
-            data-bs-target='#charts-nav'
-            data-bs-toggle='collapse'
-            href='#'
-          >
-            <i class='bi bi-bar-chart'></i><span>Balances</span><i
-              class='bi bi-chevron-down ms-auto'
-            ></i>
-          </a>
-          <ul
-            id='charts-nav'
-            class='nav-content collapse'
-            data-bs-parent='#sidebar-nav'
-          >
-            <li>
-              <a href='charts-chartjs.html'>
-                <i class='bi bi-circle'></i><span>Ventas</span>
-              </a>
-            </li>
-            <li>
-              <a href='charts-apexcharts.html'>
-                <i class='bi bi-circle'></i><span>Gastos</span>
-              </a>
-            </li>
-            <li>
-              <a href='charts-echarts.html'>
-                <i class='bi bi-circle'></i><span>Ingresos</span>
+              <a href="../productos/view">
+                <i class="bi bi-circle"></i><span>Ajustes de Inventario</span>
               </a>
             </li>
           </ul>
         </li>
       </ul>
-
     </aside>
 
-    <main id='main' class='main'>
-
-      <div class='pagetitle'>
+    <main id="main" class="main">
+      <div class="pagetitle">
         <h1>Inicio</h1>
         <nav>
-          <ol class='breadcrumb'>
-            <li class='breadcrumb-item'><a href='index.hbs'>Home</a></li>
-            <li class='breadcrumb-item active'>Dashboard</li>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav>
       </div>
-      <section class='section dashboard'>
-        <div class='row'>
-<div class="container">
-<h1 class="my-5">Registrar Gasto</h1>
-<form id="registroGastoForm">
-  <div class="mb-3">
-    <label for="descripcionInput" class="form-label">Descripción</label>
-    <input type="text" class="form-control" id="descripcionInput" required>
-  </div>
-  <div class="mb-3">
-    <label for="tipoGastoSelect" class="form-label">Tipo de Gasto</label>
-    <select class="form-select" id="tipoGastoSelect" required>
-      <option selected disabled value="">Seleccione un tipo de gasto</option>
-      <!-- Aquí puedes incluir opciones de tipos de gasto dinámicamente desde la base de datos -->
-      <option value="1">Tipo de Gasto 1</option>
-      <option value="2">Tipo de Gasto 2</option>
-      <!-- Agrega más opciones según tus necesidades -->
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="valorInput" class="form-label">Valor</label>
-    <input type="number" class="form-control" id="valorInput" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Registrar Gasto</button>
-</form>
-            </div>
+      <section class="section dashboard">
+        <div class="row">
+          <div class="container">
+            <h1 class="my-5">Registrar Gasto</h1>
+            <form id="registroGastoForm">
+              <div class="mb-3">
+                <label for="descripcionInput"
+                  class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcionInput"
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="tipoGastoSelect" class="form-label">Tipo de
+                  Gasto</label>
+                <select class="form-select" id="tipoGastoSelect" required>
+                  <option selected disabled value>Seleccione un tipo de
+                    gasto</option>
+                  {{#each gastos}}
+                  <option value="{{this.id_tipo}}">{{this.id_tipo}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="valorInput" class="form-label">Valor</label>
+                <input type="number" class="form-control" id="valorInput"
+                  required />
+              </div>
+              <button type="submit" class="btn btn-primary">Registrar
+                Gasto</button>
+            </form>
           </div>
         </div>
       </section>
-
     </main>
- 
-    <footer id='footer' class='footer'>
-    </footer>
 
-    <a
-      href='#'
-      class='back-to-top d-flex align-items-center justify-content-center'
-    ><i class='bi bi-arrow-up-short'></i></a>
-
-    <script src='/vendor/apexcharts/apexcharts.min.js'></script>
-    <script src='/vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
-    <script src='/vendor/chart.js/chart.umd.js'></script>
-    <script src='/vendor/echarts/echarts.min.js'></script>
-    <script src='/vendor/quill/quill.js'></script>
-    <script src='/vendor/simple-datatables/simple-datatables.js'></script>
-    <script src='/vendor/tinymce/tinymce.min.js'></script>
-    <script src='/vendor/php-email-form/validate.js'></script>
-
-    <script src='/js/main.js'></script>
-
+    <a href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
   </body>
+  <footer id="footer" class="footer">
+    <script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/chart.js/chart.umd.js"></script>
+    <script src="/static/vendor/echarts/echarts.min.js"></script>
+    <script src="/static/vendor/quill/quill.js"></script>
+    <script
+      src="/static/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/static/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/static/vendor/php-email-form/validate.js"></script>
+    <script src="/static/js/main.js"></script>
 
+    <script>
+        document.getElementById('registroGastoForm').addEventListener('submit', async function (event) {
+          event.preventDefault();
+
+          const descripcion = document.getElementById('descripcionInput').value;
+          const id_tipo = parseInt(document.getElementById('tipoGastoSelect').value);
+          const valor = parseFloat(document.getElementById('valorInput').value);
+          const fecha_gasto = new Date().toISOString();
+
+
+          try {
+            const response = await fetch('/gastos', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+          
+                id_tipo,
+                descripcion,
+                fecha_gasto,
+                valor,
+                 
+              }),
+            });
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.message || 'Error al registrar el gasto');
+            }
+
+            alert('Gasto registrado exitosamente');
+          } catch (error) {
+            alert('Error al registrar el gasto: ' + error.message);
+          }
+        });
+      </script>
+  </footer>
 </html>

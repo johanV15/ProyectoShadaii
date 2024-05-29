@@ -3,10 +3,6 @@ import {IsInt, IsNumber, IsOptional} from 'class-validator';
 export class UpdateDetalleVentasDto{
     @IsInt()
     @IsOptional()
-    id?: number;
-
-    @IsInt()
-    @IsOptional()
     id_venta?: number;
 
     @IsInt()

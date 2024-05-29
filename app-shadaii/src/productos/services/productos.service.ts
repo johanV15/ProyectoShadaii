@@ -14,12 +14,20 @@ export class ProductosService {
   }
 
   async findAll() {
-    return this.prisma.productos.findMany();
+    return this.prisma.productos.findMany({
+      include: {
+        stock_productos: true,
+      }
+    });
+
   }
 
   async findOne(id: number) {
     return this.prisma.productos.findUnique({
       where: { id },
+      include: {
+        stock_productos: true,
+      },
     });
   }
 

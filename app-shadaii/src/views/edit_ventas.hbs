@@ -90,12 +90,12 @@
             data-bs-parent='#sidebar-nav'
           >
             <li>
-              <a href='view'>
+              <a href='../ventas/view'>
                 <i class='bi bi-circle'></i><span>Registrar una venta</span>
               </a>
             </li>
             <li>
-              <a href='../DetalleVentas/view'>
+              <a href>
                 <i class='bi bi-circle'></i><span>Editar Ventas</span>
               </a>
             </li>
@@ -124,7 +124,7 @@
               </a>
             </li>
             <li>
-              <a href='../gastos/edit_view'>
+              <a href>
                 <i class='bi bi-circle'></i><span>Editar Gastos</span>
               </a>
             </li>
@@ -147,7 +147,7 @@
             data-bs-parent='#sidebar-nav'
           >
             <li>
-              <a href='../productos/view'>
+              <a href='productos/view'>
                 <i class='bi bi-circle'></i><span>Ajustes de Inventario</span>
               </a>
             </li>
@@ -159,59 +159,130 @@
     <main id='main' class='main'>
 
       <div class='pagetitle'>
-        <h1>Ventas</h1>
+        <h1>Inicio</h1>
         <nav>
           <ol class='breadcrumb'>
-            <li class='breadcrumb-item'><a href='/'>Ventas</a></li>
-            <li class='breadcrumb-item active'>Registro Venta</li>
+            <li class='breadcrumb-item'><a href='view'>Inventario</a></li>
+            <li class='breadcrumb-item active'>Inventario Dashboard</li>
           </ol>
         </nav>
       </div>
-      <section class='section dashboard'>
-        <div class='row'>
+      <div class='container mt-5'>
+        <h2>Lista de Ventas</h2>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ID producto</th>
+              <th>ID cliente</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each detalleVentas}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.id_producto}}</td>
+                <td>{{this.id_cliente}}</td>
+                <td>{{this.cantidad}}</td>
+                <td>{{this.subtotal}}</td>
 
-          <div class='container'>
-            <h1 class='my-5'>Registro de Venta</h1>
-<form id="registroVentaForm">
-  <div class="mb-3">
-    <label for="productoSelect" class="form-label">Producto</label>
-    <select class="form-select" id="productoSelect" required>
-      <option selected disabled value="">Seleccione un producto</option>
-      {{#each productos}}
-        <option value="{{this.id}}">{{this.nombre}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="clienteSelect" class="form-label">Cliente</label>
-    <select class="form-select" id="clienteSelect" required>
-      <option selected disabled value="">Seleccione un cliente</option>
-      {{#each clientes}}
-        <option value="{{this.id}}">{{this.nombre}} {{this.apellido}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="cantidadInput" class="form-label">Cantidad</label>
-    <input type="number" class="form-control" id="cantidadInput" required />
-  </div>
-  <button type="submit" class="btn btn-primary">Registrar Venta</button>
-</form>
+                <td>
+                  <button
+                    class='btn btn-primary'
+                    onclick="editarProducto({{this.id}}, '{{this.nombre}}', {{this.precio_venta}})"
+                  >Editar</button>
+                  <button
+                    class='btn btn-danger'
+                    onclick='eliminarProducto({{this.id}})'
+                  >Eliminar</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div
+        class='modal fade'
+        id='editarVentaModal'
+        tabindex='-1'
+        aria-labelledby='editarVentaModalLabel'
+        aria-hidden='true'
+      >
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h5 class='modal-title' id='editarProductoModalLabel'>Editar
+                Producto</h5>
+              <button
+                type='button'
+                class='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div class='modal-body'>
+              <form id='editarProductoForm'>
+                <input type='hidden' id='editarProductoId' />
+                <div class='mb-3'>
+                  <label
+                    for='editarProductoNombre'
+                    class='form-label'
+                  >Nombre</label>
+                  <input
+                    type='text'
+                    class='form-control'
+                    id='editarProductoNombre'
+                    required
+                  />
+                </div>
+                <div class='mb-3'>
+                  <label for='editarProductoPrecio' class='form-label'>Precio de
+                    Venta</label>
+                  <input
+                    type='number'
+                    class='form-control'
+                    id='editarProductoPrecio'
+                    step='0.01'
+                    required
+                  />
+                </div>
+                <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
+              </form>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+      <script>
+        function editarVenta(id, cantidad) {
+        document.getElementById('editarVentaId').value = id;
+        document.getElementById('editarVentaCantidad').value = cantidad;
+        var editarVentaModal = new
+        bootstrap.Modal(document.getElementById('editarVentaModal'));
+        editarVentaModal.show(); }
+        document.getElementById('editarVentaForm').addEventListener('submit',
+        async function(event) { event.preventDefault(); const id =
+        document.getElementById('editarVentaId').value; const cantidad =
+        document.getElementById('editarVentaCantidad').value; const
+        response = await fetch(`/detalleventas/${id}`, { method: 'PATCH', headers: {
+        'Content-Type': 'application/json' }, body: JSON.stringify({ cantidad }) }); if (response.ok) { location.reload(); } else {
+        alert('Error al actualizar la venta'); } }); async function
+        eliminarProducto(id) { const response = await fetch(`/detalleventas/${id}`,
+        { method: 'DELETE' }); if (response.ok) { location.reload(); } else {
+        alert('Error al eliminar la venta'); } }
+      </script>
     </main>
+
+    <footer id='footer' class='footer'>
+    </footer>
+
     <a
       href='#'
       class='back-to-top d-flex align-items-center justify-content-center'
     ><i class='bi bi-arrow-up-short'></i></a>
-    <script
-      src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'
-    ></script>
-    <script>
-      document.getElementById('registroVentaForm').addEventListener('submit',
-      function(event) { event.preventDefault(); });
-    </script>
+
     <script src='/static/vendor/apexcharts/apexcharts.min.js'></script>
     <script src='/static/vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
     <script src='/static/vendor/chart.js/chart.umd.js'></script>
@@ -224,30 +295,7 @@
     <script src='/static/vendor/php-email-form/validate.js'></script>
 
     <script src='/static/js/main.js'></script>
-    <script>
-  document.getElementById('registroVentaForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
 
-    const id_producto = parseInt(document.getElementById('productoSelect').value);
-    const id_cliente = parseInt(document.getElementById('clienteSelect').value);
-    const cantidad = parseInt(document.getElementById('cantidadInput').value);
-    const fecha_venta = new Date().toISOString();
-
-    const response = await fetch('/Ventas', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id_producto, id_cliente, cantidad, fecha_venta }),
-    });
-
-    if (response.ok) {
-      alert('Venta registrada exitosamente');
-    } else {
-      alert('Error al registrar la venta');
-    }
-  });
-</script>
   </body>
 
 </html>

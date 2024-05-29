@@ -14,12 +14,19 @@ export class TipoGastosService {
   }
 
   async findAll() {
-    return this.prisma.tipo_gasto.findMany();
+    return this.prisma.tipo_gasto.findMany({
+      include: {
+        gastos: true,
+      }
+    });
   }
 
   async findOne(id: number) {
     return this.prisma.tipo_gasto.findUnique({
       where: { id },
+        include: {
+            gastos: true,
+        }
     });
   }
 

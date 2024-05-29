@@ -6,11 +6,11 @@ import { UpdateDetallePedidosDto } from '../dtos/update-detalle-pedidos.dto';
 @Controller('DetallePedidos')
 export class DetallePedidosController {
   constructor(private readonly detallePedidosService: DetallePedidosService) {}
-/*
+
   @Post()
   create(@Body() createDetallePedidosDto: CreateDetallePedidosDto) {
     return this.detallePedidosService.create(createDetallePedidosDto);
-  }*/
+  }
 
   @Get()
   findAll() {
@@ -18,17 +18,17 @@ export class DetallePedidosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.detallePedidosService.findOne(+id);
   }
-/*
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDetallePedidosDto: UpdateDetallePedidosDto) {
+  update(@Param('id') id: number, @Body() updateDetallePedidosDto: UpdateDetallePedidosDto) {
     return this.detallePedidosService.update(+id, updateDetallePedidosDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.detallePedidosService.remove(+id);
-  }*/
+  }
 }

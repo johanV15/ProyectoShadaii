@@ -14,12 +14,22 @@ export class DetalleVentasService {
   }
 
   async findAll() {
-    return this.prisma.detalle_ventas.findMany();
+    return this.prisma.detalle_ventas.findMany({
+      include: {
+        venta: true,
+        cliente: true,
+        producto: true,
+      }
+    });
   }
-
   async findOne(id: number) {
     return this.prisma.detalle_ventas.findUnique({
       where: { id },
+      include: {
+        venta: true,
+        cliente: true,
+        producto: true,
+      }
     });
   }
 

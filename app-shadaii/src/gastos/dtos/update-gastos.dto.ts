@@ -1,9 +1,6 @@
 import {IsDate, IsInt, IsNumber, IsOptional, IsString} from 'class-validator';
 
 export class UpdateGastosDto{
-    @IsInt()
-    @IsOptional()
-    id: number;
 
     @IsInt()
     @IsOptional()

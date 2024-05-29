@@ -6,12 +6,12 @@ import { UpdateDetallePedidosDto } from '../dtos/update-detalle-pedidos.dto';
 @Injectable()
 export class DetallePedidosService {
   constructor(private prisma: PrismaService) {}
-/*
+
   async create(data: CreateDetallePedidosDto) {
-    return this.prisma.detalle_Pedidos.create({
+    return this.prisma.detalle_pedidos.create({
       data,
     });
-  }*/
+  }
 
   async findAll() {
     return this.prisma.detalle_pedidos.findMany();
@@ -23,13 +23,13 @@ export class DetallePedidosService {
     });
   }
 
- /* async update(id: number, data: UpdateDetallePedidosDto) {
-    return this.prisma.detalle_Pedidos.update({
+  async update(id: number, data: UpdateDetallePedidosDto) {
+    return this.prisma.detalle_pedidos.update({
       where: { id },
       data,
     });
   }
-*/
+
   async remove(id: number) {
     return this.prisma.detalle_pedidos.delete({
       where: { id },

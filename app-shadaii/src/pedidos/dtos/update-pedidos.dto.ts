@@ -1,9 +1,9 @@
-import {IsInt, IsOptional} from 'class-validator';
+import {IsInt, IsOptional, IsString} from 'class-validator';
 
 export class UpdatePedidosDto{
-    @IsInt()
+    @IsString()
     @IsOptional()
-    id?: number;
+    id?: string;
     @IsInt()
     @IsOptional()
     id_gasto?: number;
