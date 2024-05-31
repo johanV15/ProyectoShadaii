@@ -7,12 +7,11 @@ import { UpdatePagosDto } from '../dtos/update-pagos.dto';
 export class PagosService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreatePagosDto) {
+  async create(createPagosDto: CreatePagosDto) {
     return this.prisma.pagos.create({
-      data,
+      data: createPagosDto,
     });
   }
-
   async findAll() {
     return this.prisma.pagos.findMany();
   }

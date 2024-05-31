@@ -4,13 +4,15 @@ import { CreateVentasDto } from '../dtos/create-ventas.dto';
 import { UpdateVentasDto } from '../dtos/update-ventas.dto';
 import { StockService } from 'src/stockProductos/services/stock.service';
 import { ProductosService } from 'src/productos/services/productos.service';
+import { PagosService } from 'src/pagos/services/pagos.service';
 
 @Injectable()
 export class VentasService {
   constructor(
     private prisma: PrismaService,
-    private stockService: StockService, // Servicio para manejar el stock
-    private productosService: ProductosService
+    private stockService: StockService,
+    private productosService: ProductosService,
+    private pagosService: PagosService
   ) {}
 
   async create(createVentasDto: CreateVentasDto) {

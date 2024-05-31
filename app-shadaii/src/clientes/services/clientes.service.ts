@@ -14,7 +14,11 @@ export class ClientesService {
   }
 
   async findAll() {
-    return this.prisma.clientes.findMany();
+    return this.prisma.clientes.findMany({
+      include: {
+        pagos: true,
+      }
+    });
   }
 
   async findOne(id: number) {

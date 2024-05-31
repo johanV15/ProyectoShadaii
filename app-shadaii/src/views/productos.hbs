@@ -268,7 +268,7 @@
     const nombre = document.getElementById('nuevoProductoNombre').value;
     const precio_venta = parseFloat(document.getElementById('nuevoProductoPrecio').value);
 
-    const response = await fetch('/productos', {
+    const response = await fetch('/Productos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -282,8 +282,6 @@
       alert('Error al agregar el producto');
     }
   });
-</script>
-      <script>
         function editarProducto(id, nombre, precio_venta) {
         document.getElementById('editarProductoId').value = id;
         document.getElementById('editarProductoNombre').value = nombre;

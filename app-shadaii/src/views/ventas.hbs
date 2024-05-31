@@ -156,144 +156,201 @@
       </ul>
     </aside>
 
-    <main id='main' class='main'>
+   <main id='main' class='main'>
+  <div class='pagetitle'>
+    <h1>Ventas</h1>
+    <nav>
+      <ol class='breadcrumb'>
+        <li class='breadcrumb-item'><a href='/'>Ventas</a></li>
+        <li class='breadcrumb-item active'>Registro Venta</li>
+      </ol>
+    </nav>
+  </div>
+  <section class='section dashboard'>
+    <div class='row'>
+      <div class='container'>
+        <h1 class='my-5'>Registro de Venta</h1>
+        <form id="registroVentaForm">
+          <div class="mb-3">
+            <label for="productoSelect" class="form-label">Producto</label>
+            <select class="form-select" id="productoSelect" required>
+              <option selected disabled value="">Seleccione un producto</option>
+              {{#each productos}}
+                <option value="{{this.id}}">{{this.nombre}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="clienteSelect" class="form-label">Cliente</label>
+            <select class="form-select" id="clienteSelect" required>
+              <option selected disabled value="">Seleccione un cliente</option>
+              {{#each clientes}}
+                <option value="{{this.id}}">{{this.nombre}} {{this.apellido}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="cantidadInput" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="cantidadInput" required />
+          </div>
 
-      <div class='pagetitle'>
-        <h1>Ventas</h1>
-        <nav>
-          <ol class='breadcrumb'>
-            <li class='breadcrumb-item'><a href='/'>Ventas</a></li>
-            <li class='breadcrumb-item active'>Registro Venta</li>
-          </ol>
-        </nav>
+          <!-- Sección de Pago -->
+          <h2 class="my-4">Pago</h2>
+          <div class="mb-3">
+            <label for="totalPagoInput" class="form-label">Total Pago</label>
+            <input type="number" class="form-control" id="totalPagoInput" readonly />
+          </div>
+          <div class="mb-3">
+            <label for="fechaPagoInput" class="form-label">Fecha de Pago</label>
+            <input type="text" class="form-control" id="fechaPagoInput" readonly />
+          </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clienteModal">
+            Registrar Cliente
+          </button>
+          <button type="submit" class="btn btn-primary">Registrar Venta</button>
+        </form>
+
+        <!-- Modal para registrar nuevo cliente -->
+        <div class="modal fade" id="clienteModal" tabindex="-1" aria-labelledby="clienteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+        <h5 class="modal-title" id="clienteModalLabel">Registrar Nuevo Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+        <form id="registroClienteForm">
+          <div class="mb-3">
+            <label for="nombreInput" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreInput" required />
+          </div>
+          <div class="mb-3">
+            <label for="apellidoInput" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellidoInput" required />
+          </div>
+          <div class="mb-3">
+            <label for="IDInput" class="form-label">Cedula</label>
+            <input type="number" class="form-control" id="IDInput" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+        </form>
       </div>
-      <section class='section dashboard'>
-        <div class='row'>
-
-          <div class='container'>
-            <h1 class='my-5'>Registro de Venta</h1>
-<form id="registroVentaForm">
-  <div class="mb-3">
-    <label for="productoSelect" class="form-label">Producto</label>
-    <select class="form-select" id="productoSelect" required>
-      <option selected disabled value="">Seleccione un producto</option>
-      {{#each productos}}
-        <option value="{{this.id}}">{{this.nombre}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="clienteSelect" class="form-label">Cliente</label>
-    <select class="form-select" id="clienteSelect" required>
-      <option selected disabled value="">Seleccione un cliente</option>
-      {{#each clientes}}
-        <option value="{{this.id}}">{{this.nombre}} {{this.apellido}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="cantidadInput" class="form-label">Cantidad</label>
-    <input type="number" class="form-control" id="cantidadInput" required />
-  </div>
-    <div class="mb-3">
-    <label for="pagoSelect" class="form-label">Pago</label>
-    <select class="form-select" id="pagoSelect" required>
-      <option selected disabled value="">Se realizo pago</option>
-        <option value="true">Si</option>
-                <option value="false">No</option>
-
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Registrar Venta</button>
-</form>
-<h1 class="my-5">Registrar Nuevo Cliente</h1>
-            <form id="registroClienteForm">
-              <div class="mb-3">
-                <label for="nombreInput" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombreInput" required />
-              </div>
-              <div class="mb-3">
-                <label for="apellidoInput" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="apellidoInput" required />
-              </div>
-              <div class="mb-3">
-                <label for="IDInput" class="form-label">ID</label>
-                <input type="number" class="form-control" id="IDInput" required />
-              </div>
-              <button type="submit" class="btn btn-primary">Registrar Cliente</button>
-            </form>
-          </div>s
-        </div>
-      </section>
-    </main>
-    <a
-      href='#'
-      class='back-to-top d-flex align-items-center justify-content-center'
-    ><i class='bi bi-arrow-up-short'></i></a>
-    <script
-      src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'
-    ></script>
-    <script>
-      document.getElementById('registroVentaForm').addEventListener('submit',
-      function(event) { event.preventDefault(); });
-    </script>
-    <script src='/static/vendor/apexcharts/apexcharts.min.js'></script>
-    <script src='/static/vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
-    <script src='/static/vendor/chart.js/chart.umd.js'></script>
-    <script src='/static/vendor/echarts/echarts.min.js'></script>
-    <script src='/static/vendor/quill/quill.js'></script>
-    <script
-      src='/static/vendor/simple-datatables/simple-datatables.js'
-    ></script>
-    <script src='/static/vendor/tinymce/tinymce.min.js'></script>
-    <script src='/static/vendor/php-email-form/validate.js'></script>
-
+      </div>
+    </div>
+  </section>
+</main>
+<a href='#' class='back-to-top d-flex align-items-center justify-content-center'>
+  <i class='bi bi-arrow-up-short'></i>
+</a>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script>
-      document.getElementById('registroVentaForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const id_producto = parseInt(document.getElementById('productoSelect').value);
-        const id_cliente = parseInt(document.getElementById('clienteSelect').value);
-        const cantidad = parseInt(document.getElementById('cantidadInput').value);
-        const fecha_venta = new Date().toISOString();
-        const pago = document.getElementById('pagoSelect').value === 'true';
+  document.getElementById('registroVentaForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const id_producto = parseInt(document.getElementById('productoSelect').value);
+    const id_cliente = parseInt(document.getElementById('clienteSelect').value);
+    const cantidad = parseInt(document.getElementById('cantidadInput').value);
+    const fecha_venta = new Date().toISOString();
+    
+    // Calcular el subtotal (esto podría requerir un fetch adicional para obtener el precio del producto)
+  const responsePrecio = await fetch(`/Productos/${id_producto}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-        const response = await fetch('/Ventas', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id_producto, id_cliente, cantidad, fecha_venta, pago }),
-        });
+  let precioProducto;
+  if (responsePrecio.ok) {
+    const producto = await responsePrecio.json();
+    precioProducto = producto.precio_venta; // Suponiendo que el precio de venta del producto se encuentra en el campo 'precio_venta'
+  } else {
+    alert('Error al obtener el precio del producto');
+    return;
+  }    const subtotal = precioProducto * cantidad;
 
-        if (response.ok) {
-          alert('Venta registrada exitosamente');
-        } else {
-          alert('Error al registrar la venta');
-        }
+    const responseVenta = await fetch('/Ventas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_producto, id_cliente, cantidad, fecha_venta }),
+    });
+
+    if (responseVenta.ok) {
+      const venta = await responseVenta.json();
+      const id_venta = venta.id;
+      const fecha_pago = new Date().toISOString();
+      const total_pago = subtotal;
+
+      const responsePago = await fetch('/Pagos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_venta, id_cliente, fecha_pago, total_pago, pagado: true }),
       });
 
-      document.getElementById('registroClienteForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const nombre = document.getElementById('nombreInput').value;
-        const apellido = document.getElementById('apellidoInput').value;
-        const id = parseInt(document.getElementById('IDInput').value);
+      if (responsePago.ok) {
+        alert('Venta y pago registrados exitosamente');
+        document.getElementById('registroVentaForm').reset();
+      } else {
+        alert('Error al registrar el pago');
+      }
+    } else {
+      alert('Error al registrar la venta');
+    }
+  });
 
-        const response = await fetch('/Clientes', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre, apellido, id }),
-        });
+  document.getElementById('registroClienteForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const nombre = document.getElementById('nombreInput').value;
+    const apellido = document.getElementById('apellidoInput').value;
+    const id = parseInt(document.getElementById('IDInput').value);
 
-        if (response.ok) {
-          const nuevoCliente = await response.json();
-          const clienteSelect = document.getElementById('clienteSelect');
-          const nuevaOpcion = new Option(`${nuevoCliente.nombre} ${nuevoCliente.apellido}`, nuevoCliente.id);
-          clienteSelect.add(nuevaOpcion);
-          clienteSelect.value = nuevoCliente.id;
-          alert('Cliente registrado exitosamente');
-        } else {
-          alert('Error al registrar el cliente');
-        }
-      });
-    </script>
+    const response = await fetch('/Clientes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, apellido, id }),
+    });
+
+    if (response.ok) {
+      const nuevoCliente = await response.json();
+      const clienteSelect = document.getElementById('clienteSelect');
+      const nuevaOpcion = new Option(`${nuevoCliente.nombre} ${nuevoCliente.apellido}`, nuevoCliente.id);
+      clienteSelect.add(nuevaOpcion);
+      clienteSelect.value = nuevoCliente.id;
+      alert('Cliente registrado exitosamente');
+    } else {
+      alert('Error al registrar el cliente');
+    }
+  });
+
+  // Actualizar campos de pago al cambiar cantidad o producto
+  document.getElementById('productoSelect').addEventListener('change', actualizarPago);
+  document.getElementById('cantidadInput').addEventListener('input', actualizarPago);
+
+async function actualizarPago() {
+  const cantidad = parseInt(document.getElementById('cantidadInput').value) || 0;
+  const id_producto = parseInt(document.getElementById('productoSelect').value);
+  
+  // Obtener el precio real del producto mediante una solicitud al servidor
+  const responsePrecio = await fetch(`/Productos/${id_producto}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  let precioProducto;
+  if (responsePrecio.ok) {
+    const producto = await responsePrecio.json();
+    precioProducto = producto.precio_venta; // Suponiendo que el precio de venta del producto se encuentra en el campo 'precio_venta'
+  } else {
+    alert('Error al obtener el precio del producto');
+    return;
+  }
+
+  // Calcular el subtotal utilizando el precio obtenido
+  const subtotal = precioProducto * cantidad;
+
+  // Actualizar los campos de entrada con los valores calculados
+  document.getElementById('totalPagoInput').value = subtotal;
+  document.getElementById('fechaPagoInput').value = new Date().toISOString().split('T')[0]; 
+}
+</script>
   
   </body>
 
